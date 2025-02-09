@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <style>
-        .task {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        .task button {
-            margin-left: 10px;
-            color: white;
-            background-color: red;
-            border: none;
-            padding: 4px 8px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Personal Library</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>
-        <h1>To-Do List</h1>
-        <input type="text" id="task-input" placeholder="Add a new task">
-        <button id="add-task">Add Task</button>
-    </div>
-    <div id="task-list"></div>
-    <script src="script.js"></script>
+    <header>
+        <h1>📚 My Library</h1>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search for books...">
+            <button id="search-btn">Search</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="shelf" id="to-read">
+            <h2>📖 To Read</h2>
+            <div class="book-container"></div>
+        </section>
+
+        <section class="shelf" id="reading">
+            <h2>📘 Reading</h2>
+            <div class="book-container"></div>
+        </section>
+
+        <section class="shelf" id="finished">
+            <h2>✅ Finished</h2>
+            <div class="book-container"></div>
+        </section>
+    </main>
+
+    <div class="search-results"></div>
+
+    <script src="script.js">
+        
+    </script>
 </body>
 </html>
