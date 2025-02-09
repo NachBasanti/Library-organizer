@@ -2,7 +2,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
         const searchInput = document.getElementById("search-bar");
         const searchButton = document.getElementById("search-btn");
 
-        // Initialize storage if it doesn't exist
         if (!localStorage.getItem("library")) {
             localStorage.setItem("library", JSON.stringify([]));
         }
@@ -12,7 +11,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             return str.replace(/'/g, "&apos;").replace(/"/g, "&quot;");
         }
 
-        // Function to search books using Google Books API
         async function searchBooks() {
             const query = searchInput.value.trim();
             if (!query) return;
@@ -32,7 +30,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             }
         }
 
-        // Function to display search results
         function displaySearchResults(books) {
             const searchResults = document.querySelector(".search-results");
             searchResults.innerHTML = "";
@@ -71,7 +68,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             });
         }
 
-        // Function to add book to Local Storage
         function addToLibrary(title, author, thumbnail) {
             try {
                 const book = {
@@ -83,7 +79,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
                 
                 let library = JSON.parse(localStorage.getItem("library")) || [];
                 
-                // Check if book already exists
                 if (!library.some(b => b.title === book.title)) {
                     library.push(book);
                     localStorage.setItem("library", JSON.stringify(library));
@@ -98,19 +93,16 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             }
         }
 
-        // Function to update UI with books from Local Storage
         function updateLibraryUI() {
             try {
                 const library = JSON.parse(localStorage.getItem("library")) || [];
                 
-                // Clear existing book lists
                 document.querySelectorAll(".book-container").forEach(container => container.innerHTML = "");
 
                 library.forEach((book, index) => {
                     const bookCard = document.createElement("div");
                     bookCard.classList.add("book");
                     
-                    // Create elements
                     const img = document.createElement("img");
                     img.src = book.thumbnail;
                     img.alt = book.title;
@@ -133,7 +125,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
                     removeButton.textContent = "Remove";
                     removeButton.onclick = () => removeBook(index);
                     
-                    // Append elements
                     bookCard.appendChild(img);
                     bookCard.appendChild(titleElem);
                     bookCard.appendChild(authorElem);
@@ -150,7 +141,6 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             }
         }
 
-        // Function to update book status
         function updateStatus(index, newStatus) {
             try {
                 let library = JSON.parse(localStorage.getItem("library")) || [];
@@ -176,11 +166,9 @@ const apiKey = "AIzaSyCOhOsTWoNJtOwOl4cqA7LMTlPq6qa5gwY";
             }
         }
 
-        // Event Listeners
         searchButton.addEventListener("click", searchBooks);
         searchInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") searchBooks();
         });
 
-        // Initialize UI
         document.addEventListener("DOMContentLoaded", updateLibraryUI);
